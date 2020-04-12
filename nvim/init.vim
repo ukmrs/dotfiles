@@ -3,8 +3,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'w0rp/ale'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-	Plug 'morhetz/gruvbox'
-	Plug 'taigacute/gruvbox9'
 	Plug 'lifepillar/vim-gruvbox8'
 
 	Plug 'vim-python/python-syntax'
@@ -20,9 +18,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 call plug#end()
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " Set of basic vim options
+set background=dark " use dark mode
+" set background=light "use light mode
 colorscheme gruvbox8
 set number relativenumber
 set autoindent
@@ -31,11 +31,10 @@ set ignorecase
 set smartcase
 set undofile
 set colorcolumn=99
+set foldlevel=99
 
 
 let g:airline_theme='bubblegum'
-set background=dark " use dark mode
-" set background=light " uncomment to use light mode
 
 " Syntax highlighting
 let g:python_highlight_all = 1
@@ -52,7 +51,6 @@ function! s:check_back_space() abort "{{{
   return !col || getline('.')[col - 1]  =~? '\s'
 endfunction"}}}
 
-set foldlevel=99
 
 " ALE - Asynchronous LintEngine
 let g:ale_linters = {
