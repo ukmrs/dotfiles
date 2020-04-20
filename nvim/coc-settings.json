@@ -2,5 +2,8 @@
   "python.linting.enabled": false,
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/anaconda3/envs/pyk/bin/black",
-  "rust-analyzer.diagnostics.enable": false
-}
+  "rust-analyzer.diagnostics.enable": false,
+  "pyright.disableLanguageServices": true,
+  "python.jediEnabled": true,
+  "pyright.reportGeneralTypeIssues": "none"
+  }
