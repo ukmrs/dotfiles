@@ -1,9 +1,8 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 	Plug 'w0rp/ale'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 	Plug 'lifepillar/vim-gruvbox8'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 	Plug 'vimwiki/vimwiki'
 	Plug 'vim-python/python-syntax'
@@ -15,6 +14,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'mbbill/undotree'  "Questionable
 	Plug 'sbdchd/vim-run'
 	Plug 'janko/vim-test'
+	
+	Plug 'sakhnik/nvim-gdb'
+
 	Plug 'christoomey/vim-system-copy'
 	Plug 'romainl/vim-cool'  "stop highlighting after search
 	Plug 'tpope/vim-fugitive'  "git integration
@@ -39,7 +41,7 @@ set ignorecase
 set smartcase
 set undofile
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+" highlight ColorColumn ctermbg=0 guibg=lightgrey
 set foldlevel=99
 set sidescrolloff=3
 set scrolloff=3
@@ -73,9 +75,11 @@ endfunction"}}}
 " ALE - Asynchronous LintEngine
 " I found somethin about passin ls to ale once
 " perhaps i should snoop some more
+
+"i am using rust analyzer for now
+"\   'rust': ['rls'],
 let g:ale_linters = {
 \   'python': ['flake8'],
-\   'rust': ['rls'],
 \   'javascript': ['eslint'],
 \}
 
