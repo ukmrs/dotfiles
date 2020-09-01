@@ -72,7 +72,6 @@ let g:sneak#label = 1
 
 " close this deoplete bullshit at the top
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 " Complete with <TAB>
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -112,7 +111,7 @@ let g:ale_fixers = {
 \   'htmldjango': ['html-beautify'],
 \   'css': ['prettier'],
 \   'javascript': ['prettier'],
-\   'python': ['black'],
+\   'python': ['yapf'],
 \   'rust': ['rustfmt'],
 \}
 
@@ -132,6 +131,15 @@ endfunction
 let mapleader = ' '
 nmap <silent> <leader>t :NERDTree<CR>
 nnoremap <leader>q :q<CR>
+
+"ESC
+imap jk <Esc>
+imap kj <Esc>
+imap <C-j> <Esc>
+vmap <C-j> <Esc>
+
+"save
+nnoremap <leader>s :w<CR>
 
 "window navigation
 nnoremap <leader>h :wincmd h<CR>
@@ -162,7 +170,7 @@ nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>rr :Run<CR>
 
 " ALE - Asynchronous Lint Engine
-map <silent> <C-b> :ALEFix<CR>
+map <silent> <C-o> :ALEFix<CR>
 
 
 " This is the default extra key bindings
