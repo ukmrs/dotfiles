@@ -40,6 +40,8 @@ call plug#end()
 set background=dark " use dark mode
 " set background=light "use light mode
 colorscheme gruvbox
+" background like normal terminal
+hi Normal guibg=NONE ctermbg=NONE
 set number relativenumber
 set autoindent
 set smarttab
@@ -53,6 +55,14 @@ set sidescrolloff=3
 set scrolloff=3
 set tabstop=4
 set shiftwidth=4
+"
+" to delete someday
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+set cmdheight=1
+" end of delete someday
 
 " comment
 autocmd FileType kivy setlocal commentstring=#\ %s
@@ -142,7 +152,7 @@ vmap <C-j> <Esc>
 nnoremap <leader>s :w<CR>
 
 "window navigation
-nnoremap <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
@@ -164,10 +174,10 @@ nmap <silent> gd <Plug>(coc-definition)
 	nnoremap <silent> <leader>dt :call CocAction('jumpDefinition', 'tabe')<CR>
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>n <Plug>(coc-rename)
 
 "vim-run
-nnoremap <leader>rr :Run<CR>
+nnoremap <leader>r :Run<CR>
 
 " ALE - Asynchronous Lint Engine
 map <silent> <C-o> :ALEFix<CR>
