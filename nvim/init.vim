@@ -4,11 +4,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'gruvbox-community/gruvbox'
 	Plug 'ap/vim-css-color'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 	Plug 'honza/vim-snippets'
+	Plug 'octol/vim-cpp-enhanced-highlight' "i hope to del this someday
 
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-rooter'
+
+	Plug 'fatih/vim-go'
 
 	Plug 'vimwiki/vimwiki'
 	Plug 'vim-python/python-syntax'
@@ -21,7 +25,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'sbdchd/vim-run'
 	Plug 'janko/vim-test'
 	
-	Plug 'sakhnik/nvim-gdb'
 	Plug 'justinmk/vim-sneak'
 
 	Plug 'christoomey/vim-system-copy'
@@ -39,9 +42,10 @@ call plug#end()
 " Set of basic vim options
 set background=dark " use dark mode
 " set background=light "use light mode
+syntax on
 colorscheme gruvbox
-" background like normal terminal
 hi Normal guibg=NONE ctermbg=NONE
+" background like normal terminal
 set number relativenumber
 set autoindent
 set smarttab
@@ -56,13 +60,13 @@ set scrolloff=3
 set tabstop=4
 set shiftwidth=4
 "
-" to delete someday
+" undecided => yeet the statusbar
 set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
 set cmdheight=1
-" end of delete someday
+" end of undecided
 
 " comment
 autocmd FileType kivy setlocal commentstring=#\ %s
@@ -80,6 +84,9 @@ let g:python_highlight_all = 1
 " Vim sneak
 let g:sneak#label = 1
 
+" tex
+let g:tex_no_error=1
+
 " close this deoplete bullshit at the top
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Complete with <TAB>
@@ -93,6 +100,8 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+
 
 " Snippets
 " Use <C-l> for trigger snippet expand.
@@ -123,6 +132,7 @@ let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'python': ['yapf'],
 \   'rust': ['rustfmt'],
+\   'c': ['clang-format'],
 \}
 
 function! s:show_documentation()
@@ -132,6 +142,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+let g:go_def_mapping_enabled = 0
 
 "==============
 " Key Bindings
@@ -145,12 +157,14 @@ nnoremap <leader>q :q<CR>
 "ESC
 imap jk <Esc>
 imap kj <Esc>
-imap <C-j> <Esc>
-vmap <C-j> <Esc>
+" imap <C-j> <Esc>
+" vmap <C-j> <Esc>
 
 "save
 nnoremap <leader>s :w<CR>
 
+" breakpoints cleaning
+nnoremap <leader>[ :g/breakpoint()/d<CR>
 "window navigation
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -180,7 +194,7 @@ nmap <leader>n <Plug>(coc-rename)
 nnoremap <leader>r :Run<CR>
 
 " ALE - Asynchronous Lint Engine
-map <silent> <C-o> :ALEFix<CR>
+map <silent> <leader>o :ALEFix<CR>
 
 
 " This is the default extra key bindings

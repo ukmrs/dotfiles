@@ -1,5 +1,15 @@
 {
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  },
+  "rust-analyzer.serverPath": "~/.local/bin/rust-analyzer",
+  "rust-analyzer.inlayHints.chainingHints": false,
   "python.linting.enabled": false,
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/anaconda3/envs/pyk/bin/black",
-  }
+  "clangd.path": "/home/uki/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
+}
