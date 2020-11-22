@@ -6,7 +6,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 	Plug 'honza/vim-snippets'
-	Plug 'octol/vim-cpp-enhanced-highlight' "i hope to del this someday
 
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
@@ -16,10 +15,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 	Plug 'vimwiki/vimwiki'
 	Plug 'vim-python/python-syntax'
+
 	Plug 'tmhedberg/SimpylFold'
-	Plug 'scrooloose/nerdtree'
 	Plug 'tpope/vim-commentary'  "gcc to  comment
 	Plug 'tpope/vim-surround'
+
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'mbbill/undotree'  "Questionable
 	Plug 'sbdchd/vim-run'
@@ -61,17 +61,18 @@ set tabstop=4
 set shiftwidth=4
 "
 " undecided => yeet the statusbar
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-set cmdheight=1
+" set noshowmode
+" set noruler
+" set laststatus=0
+" set noshowcmd
+" set cmdheight=1
 " end of undecided
 
 " comment
 autocmd FileType kivy setlocal commentstring=#\ %s
 " local
 autocmd Filetype rust setlocal colorcolumn=100
+autocmd Filetype python setlocal colorcolumn=80
 
 " 'wombat', 'solarized', 'darcula'
 let g:lightline = {
@@ -101,7 +102,10 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-
+" i am afraid to use this
+" if has('nvim') && !empty($CONDA_PREFIX)
+"   let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
+" endif
 
 " Snippets
 " Use <C-l> for trigger snippet expand.
@@ -120,10 +124,17 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 "ALE
+
+" I'd love to nuke rust: rls eventually
+" but RA doesnt have real time linting
+" future -> coc.settings enable_diagnostics: true
 let g:ale_linters = {
 \   'python': ['flake8'],
 \   'javascript': ['eslint'],
 \}
+
+"this gives asynchronus but maybe i dont care ehh
+"\   'rust': ['rls'],
 
 let g:ale_fixers = {
 \   'html': ['html-beautify'],
@@ -163,8 +174,6 @@ imap kj <Esc>
 "save
 nnoremap <leader>s :w<CR>
 
-" breakpoints cleaning
-nnoremap <leader>[ :g/breakpoint()/d<CR>
 "window navigation
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -182,20 +191,22 @@ nnoremap <leader>u :UndotreeShow<CR>
 " GoTo code navigation.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+
 nmap <silent> gd <Plug>(coc-definition)
 	nnoremap <silent> <leader>ds :call CocAction('jumpDefinition', 'split')<CR>
 	nnoremap <silent> <leader>dv :call CocAction('jumpDefinition', 'vsplit')<CR>
 	nnoremap <silent> <leader>dt :call CocAction('jumpDefinition', 'tabe')<CR>
 
 " Symbol renaming.
-nmap <leader>n <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-rename)
 
 "vim-run
-nnoremap <leader>r :Run<CR>
+nnoremap <leader>n :Run<CR>
 
 " ALE - Asynchronous Lint Engine
 map <silent> <leader>o :ALEFix<CR>
-
 
 " This is the default extra key bindings
 let g:fzf_action = {
